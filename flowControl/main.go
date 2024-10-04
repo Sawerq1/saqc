@@ -6,12 +6,16 @@ import (
 )
 
 func main() {
-	for counter := 0; counter < 20; counter++ {
-		switch val := counter / 2; val {
-		case 2, 3, 5, 7:
-			fmt.Println("Prime value:", val)
+	for counter := 0; counter < 10; counter++ {
+		switch {
+		case counter == 0:
+			fmt.Println("Zero value")
+		case counter < 3:
+			fmt.Println(counter, "is < 3")
+		case counter >= 3 && counter < 7:
+			fmt.Println(counter, "is more or equally 3 but less 7")
 		default:
-			fmt.Println("Non-prime value:", val)
+			fmt.Println(counter, "is more or equally 7")
 		}
 	}
 }
