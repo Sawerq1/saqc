@@ -4,8 +4,7 @@ import "fmt"
 
 func main() {
 	names := [3]string{"Kayak", "Lifejacket", "Paddle"}
-	overNames := &names
-	names[0] = "Canoe"
-	fmt.Println(names)
-	fmt.Println(*overNames)
+	moreNames := [3]string{"Kayak", "Lifejacket", "Paddle"}
+	same := names == moreNames
+	fmt.Println("Comprasion:", same)
 }
