@@ -3,12 +3,13 @@ package main
 import "fmt"
 
 func main() {
-	names := make([]string, 3, 6)
-	names[0] = "Kayak"
-	names[1] = "Lifejacket"
-	names[2] = "Padding"
-	appendedNames := append(names, "Hat", "Gloves")
-	names[0] = "Canoe"
-	fmt.Println(names)
-	fmt.Println(appendedNames)
+	products := [4]string{"Kayak", "Lifejacket", "Paddle", "Hat"}
+	someNames := products[1:3:3]
+	allNames := products[:]
+	someNames = append(someNames, "Gloves")
+	someNames = append(someNames, "Boots")
+	fmt.Println(someNames)
+	fmt.Println("Len of someNames-", len(someNames), "Cap of someNames-", cap(someNames))
+	fmt.Println(allNames)
+	fmt.Println("Len of allNames-", len(allNames), "Cap of allNames-", cap(allNames))
 }
