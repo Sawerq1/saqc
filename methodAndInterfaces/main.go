@@ -47,36 +47,97 @@ import "fmt"
 //		kayak.printDetails()
 //	}
 
+// type Expencive interface {
+// 	getName() string
+// 	getCoast(annual bool) float64
+// }
+
+// func (p Product) getName() string {
+// 	return p.name
+// }
+
+// func (p Product) getCoast(_ bool) float64 {
+// 	return p.price
+// }
+
+// func (s Service) getName() string {
+// 	return s.description
+// }
+
+// func (s Service) getCoast(recur bool) float64 {
+// 	if recur {
+// 		return float64(s.durrationMonths) * s.monthlyFee
+// 	}
+// 	return s.monthlyFee
+// }
+
+// func main() {
+// 	expences := []Expencive{
+// 		Product{"Kayak", "Watersport", 275},
+// 		Service{"Boat Cover", 12, 89.52},
+// 	}
+// 	for _, expence := range expences {
+// 		fmt.Println(expence.getName(), expence.getCoast(true))
+// 	}
+// }
+
 type Expencive interface {
 	getName() string
 	getCoast(annual bool) float64
 }
 
-func (p Product) getName() string {
-	return p.name
+type Account struct {
+	accountNumber int
+	expences      []Expencive
 }
 
-func (p Product) getCoast(_ bool) float64 {
-	return p.price
+func (service Service) getName() string {
+	return service.description
 }
 
-func (s Service) getName() string {
-	return s.description
-}
-
-func (s Service) getCoast(recur bool) float64 {
-	if recur {
-		return float64(s.durrationMonths) * s.monthlyFee
+func (service Service) getCoast(res bool) float64 {
+	if res {
+		return service.monthlyFee * float64(service.durrationMonths)
 	}
-	return s.monthlyFee
+	return service.monthlyFee
 }
 
+func (product Product) getName() string {
+	return product.name
+}
+
+func (product Product) getCoast(resurse bool) float64 {
+	return product.price
+}
+
+func calcTotal(expences []Expencive) (total float64) {
+	for _, item := range expences {
+		total += item.getCoast(true)
+	}
+	return total
+}
+
+//	func main() {
+//		expences := []Expencive{
+//			Product{"Kayak", "Watersport", 275},
+//			Service{"Boyler Corp", 12, 87.52},
+//		}
+//		for _, expence := range expences {
+//			fmt.Println(expence.getName(), expence.getCoast(true))
+//		}
+//		fmt.Println("Total price", calcTotal(expences))
+//	}
 func main() {
-	expences := []Expencive{
-		Product{"Kayak", "Watersport", 275},
-		Service{"Boat Cover", 12, 89.52},
+	account := Account{
+		accountNumber: 25552,
+		expences: []Expencive{
+			Product{"Kayak", "Watersport", 275},
+			Service{"Bebra Corp", 12, 87.25},
+		},
 	}
-	for _, expence := range expences {
+	fmt.Println(account.accountNumber)
+	for _, expence := range account.expences {
 		fmt.Println(expence.getName(), expence.getCoast(true))
 	}
+	fmt.Println(calcTotal(account.expences))
 }
