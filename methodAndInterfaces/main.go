@@ -47,9 +47,36 @@ import "fmt"
 //		kayak.printDetails()
 //	}
 
+type Expencive interface {
+	getName() string
+	getCoast(annual bool) float64
+}
+
+func (p Product) getName() string {
+	return p.name
+}
+
+func (p Product) getCoast(_ bool) float64 {
+	return p.price
+}
+
+func (s Service) getName() string {
+	return s.description
+}
+
+func (s Service) getCoast(recur bool) float64 {
+	if recur {
+		return float64(s.durrationMonths) * s.monthlyFee
+	}
+	return s.monthlyFee
+}
+
 func main() {
-	kayak := Product{"Kayak", "Watersport", 275}
-	insurence := Service{"Boat Cover", 12, 89.52}
-	fmt.Println("Product:", kayak.name, "Category:", kayak.category, "Price:", kayak.price)
-	fmt.Println("Service:", insurence.description, "Price:", insurence.monthlyFee*float64(insurence.durrationMonths))
+	expences := []Expencive{
+		Product{"Kayak", "Watersport", 275},
+		Service{"Boat Cover", 12, 89.52},
+	}
+	for _, expence := range expences {
+		fmt.Println(expence.getName(), expence.getCoast(true))
+	}
 }
