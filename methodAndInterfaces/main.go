@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 // type Product struct {
 // 	name, category string
@@ -102,11 +104,11 @@ func (service Service) getCoast(res bool) float64 {
 	return service.monthlyFee
 }
 
-func (product Product) getName() string {
+func (product *Product) getName() string {
 	return product.name
 }
 
-func (product Product) getCoast(resurse bool) float64 {
+func (product *Product) getCoast(resurse bool) float64 {
 	return product.price
 }
 
@@ -127,17 +129,34 @@ func calcTotal(expences []Expencive) (total float64) {
 //		}
 //		fmt.Println("Total price", calcTotal(expences))
 //	}
+//
+//	func main() {
+//		account := Account{
+//			accountNumber: 25552,
+//			expences: []Expencive{
+//				Product{"Kayak", "Watersport", 275},
+//				Service{"Bebra Corp", 12, 87.25},
+//			},
+//		}
+//		fmt.Println(account.accountNumber)
+//		for _, expence := range account.expences {
+//			fmt.Println(expence.getName(), expence.getCoast(true))
+//		}
+//		fmt.Println(calcTotal(account.expences))
+//	}
+//
+//	func main() {
+//		product := Product{"Kayak", "Watersport", 275}
+//		var expence Expencive = &product
+//		product.price = 100
+//		fmt.Println(product.price)
+//		fmt.Println(expence.getCoast(true))
+//	}
 func main() {
-	account := Account{
-		accountNumber: 25552,
-		expences: []Expencive{
-			Product{"Kayak", "Watersport", 275},
-			Service{"Bebra Corp", 12, 87.25},
-		},
-	}
-	fmt.Println(account.accountNumber)
-	for _, expence := range account.expences {
-		fmt.Println(expence.getName(), expence.getCoast(true))
-	}
-	fmt.Println(calcTotal(account.expences))
+	var e1 Expencive = &Product{name: "Kayak"}
+	var e2 Expencive = &Product{name: "Kayak"}
+	var e3 Expencive = Service{description: "Bebra Corp"}
+	var e4 Expencive = Service{description: "Bebra Corp"}
+	fmt.Println("e1 == e2", e1 == e2) //сравниваются места в памяти
+	fmt.Println("e3 == e4?", e3 == e4)
 }
