@@ -88,28 +88,13 @@ type Expencive interface {
 	getCoast(annual bool) float64
 }
 
+type Person struct {
+	name, city string
+}
+
 type Account struct {
 	accountNumber int
 	expences      []Expencive
-}
-
-func (service Service) getName() string {
-	return service.description
-}
-
-func (service Service) getCoast(res bool) float64 {
-	if res {
-		return service.monthlyFee * float64(service.durrationMonths)
-	}
-	return service.monthlyFee
-}
-
-func (product *Product) getName() string {
-	return product.name
-}
-
-func (product *Product) getCoast(resurse bool) float64 {
-	return product.price
 }
 
 func calcTotal(expences []Expencive) (total float64) {
@@ -152,11 +137,101 @@ func calcTotal(expences []Expencive) (total float64) {
 //		fmt.Println(product.price)
 //		fmt.Println(expence.getCoast(true))
 //	}
+// func main() {
+// 	var e1 Expencive = &Product{name: "Kayak"}
+// 	var e2 Expencive = &Product{name: "Kayak"}
+// 	//e5 := &e1
+// 	var e3 Expencive = Service{description: "Bebra Corp"}
+// 	var e4 Expencive = Service{description: "Bebra Corp"}
+// 	fmt.Println("e1 == e2", e1 == e2) //сравниваются места в памяти
+// 	fmt.Println("e3 == e4?", e3 == e4)
+// 	//fmt.Println("e1 == e5?", e1 == *e5)
+
+// }
+
+// func main() {
+// 	expenses := []Expencive{
+// 		Service{"Bebra Corp", 12, 89.50, []string{}},
+// 		Service{"Padal Protact", 12, 8, []string{}},
+// 		&Product{"Kayak", "Watersport", 285},
+// 	}
+// 	// for _, expense := range expenses {
+// 	// 	if s, ok := expense.(Service); ok {
+// 	// 		fmt.Println(s.description, s.monthlyFee*float64(s.durrationMonths))
+// 	// 	} else {
+// 	// 		fmt.Println(expense.getName(), expense.getCoast(true))
+// 	// 	}
+// 	// }
+// 	for _, expense := range expenses {
+// 		switch value := expense.(type) {
+// 		case Service:
+// 			fmt.Println("Service:", value.description, value.monthlyFee*float64(value.durrationMonths))
+// 		case *Product:
+// 			fmt.Println("Product:", value.name, value.price)
+// 		default:
+// 			fmt.Println(expense.getName(), expense.getCoast(true))
+// 		}
+// 	}
+// }
+
+func processItem(items ...interface{}) {
+	for _, item := range items {
+		switch value := item.(type) {
+		case Product:
+			fmt.Println("Product:", value.name, value.price)
+		case *Product:
+			fmt.Println("Product pointer:", value.name, value.price)
+		case Service:
+			fmt.Println("Service:", value.description, value.monthlyFee*float64(value.durrationMonths))
+		case string:
+			fmt.Println(value)
+		case int:
+			fmt.Println("This is int value:", value)
+		case bool:
+			fmt.Println("This is bool value", value)
+		case Person:
+			fmt.Println("Person:", value.name, value.city)
+		case *Person:
+			fmt.Println("Person Pointer:", value.name, value.city)
+		default:
+			fmt.Println(item)
+		}
+	}
+}
+
 func main() {
-	var e1 Expencive = &Product{name: "Kayak"}
-	var e2 Expencive = &Product{name: "Kayak"}
-	var e3 Expencive = Service{description: "Bebra Corp"}
-	var e4 Expencive = Service{description: "Bebra Corp"}
-	fmt.Println("e1 == e2", e1 == e2) //сравниваются места в памяти
-	fmt.Println("e3 == e4?", e3 == e4)
+	var expense Expencive = &Product{"Kayak", "Watersport", 275}
+	data := []interface{}{
+		expense,
+		Product{"Lifejacket", "Watersport", 45.52},
+		Service{"Bebra Corp", 12, 89.5, []string{}},
+		Person{"Alice", "Volgodonsk"},
+		&Person{"Bober", "Warshava"},
+		"This is a string",
+		100,
+		true,
+	}
+	//for _, item := range data {
+	//processItem(item)
+	// switch value := item.(type) {
+	// case Product:
+	// 	fmt.Println("Product:", value.name, value.price)
+	// case *Product:
+	// 	fmt.Println("Product pointer:", value.name, value.price)
+	// case Service:
+	// 	fmt.Println("Service:", value.description, value.monthlyFee*float64(value.durrationMonths))
+	// case string:
+	// 	fmt.Println(value)
+	// case int:
+	// 	fmt.Println("This is int value:", value)
+	// case bool:
+	// 	fmt.Println("This is bool value", value)
+	// case Person:
+	// 	fmt.Println("Person:", value.name, value.city)
+	// case *Person:
+	// 	fmt.Println("Person Pointer:", value.name, value.city)
+	// default:
+	// 	fmt.Println(expense.getName(), expense.getCoast(true))
+	// }
+	processItem(data...)
 }
