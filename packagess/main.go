@@ -19,5 +19,5 @@ func main() {
 	fmt.Println("Price:", product.Price())
 	fmt.Println("Price with $:", ToCurrency(product.Price()))
 	fmt.Println(cart.CustomerName)
-	fmt.Println("$", cart.GetTotal())
+	fmt.Println(ToCurrency(cart.GetTotal()))
 }
