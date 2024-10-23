@@ -3,9 +3,12 @@ package main
 import (
 	"fmt"
 	//	cuurencyFmt "packagess/fmt"
-	. "packagess/fmt"
+	_ "packagess/data"
+	cus "packagess/fmt"
 	"packagess/store"
+
 	"packagess/store/cart"
+	//"github.com/fatih/color"
 )
 
 func main() {
@@ -14,10 +17,12 @@ func main() {
 		CustomerName: "Alise",
 		Products:     []store.Product{*product},
 	}
-	fmt.Println("Name:", product.Name)
-	fmt.Println("Category:", product.Category)
-	fmt.Println("Price:", product.Price())
-	fmt.Println("Price with $:", ToCurrency(product.Price()))
+	//color.Green("Name:" + cart.CustomerName)
+	//color.Cyan("\nTotal:" + cus.ToCurrency(cart.GetTotal()))
+	// fmt.Println("Name:", product.Name)
+	// fmt.Println("Category:", product.Category)
+	// fmt.Println("Price:", product.Price())
+	// fmt.Println("Price with $:", cus.ToCurrency(product.Price()))
 	fmt.Println(cart.CustomerName)
-	fmt.Println(ToCurrency(cart.GetTotal()))
+	fmt.Println(cus.ToCurrency(cart.GetTotal()))
 }
