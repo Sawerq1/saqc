@@ -18,7 +18,7 @@ func main() {
 		Products:     []store.Product{*product},
 	}
 	//color.Green("Name:" + cart.CustomerName)
-	//color.Cyan("\nTotal:" + cus.ToCurrency(cart.GetTotal()))
+	//color.Cyan("Total:" + cus.ToCurrency(cart.GetTotal()))
 	// fmt.Println("Name:", product.Name)
 	// fmt.Println("Category:", product.Category)
 	// fmt.Println("Price:", product.Price())
