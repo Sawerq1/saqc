@@ -7,7 +7,7 @@ type Product struct {
 	Price          float64
 }
 
-var productList = []*Product{
+var ProductList = []*Product{
 	{"Kayak", "Watersport", 275},
 	{"Lifejacket", "Watersport", 49.95},
 	{"Soccer Ball", "Soccer", 19.95},
@@ -28,7 +28,7 @@ func ToCurrency(val float64) string {
 }
 
 func init() {
-	for _, p := range productList {
+	for _, p := range ProductList {
 		if _, ok := Products[p.Category]; ok {
 			Products[p.Category] = append(Products[p.Category], p)
 		} else {
