@@ -130,18 +130,32 @@ func main() {
 	// } else {
 	// 	fmt.Println("Error:", compileErr)
 	// }
-	pattern := regexp.MustCompile("K[A-z]{4}|[A-z]oat")
-	description := "Kayak. A boat for one person."
+	// pattern := regexp.MustCompile("K[A-z]{4}|[A-z]oat")
+	// description := "Kayak. A boat for one person."
 	// firstIndex := pattern.FindStringIndex(description)
 	// allIndex := pattern.FindAllStringIndex(description, -1)
 	// // fmt.Println("First insex:", firstIndex[0], "-", firstIndex[1], "=", getSubstring(description, firstIndex))
 	// for i, idx := range allIndex {
 	// 	fmt.Println("Index", i, "=", idx[0], "-", idx[1], "=", getSubstring(description, idx))
 	// }
-	firstMatch := pattern.FindString(description)
-	allMatch := pattern.FindAllString(description, -1)
-	fmt.Println("First match:", firstMatch)
-	for i, m := range allMatch {
-		fmt.Println("Match", i, "--", m)
+	// firstMatch := pattern.FindString(description)
+	// allMatch := pattern.FindAllString(description, -1)
+	// fmt.Println("First match:", firstMatch)
+	// for i, m := range allMatch {
+	// 	fmt.Println("Match", i, "--", m)
+	// }
+	// pattern := regexp.MustCompile(" |boat|one")
+	pattern := regexp.MustCompile("A ([A-z]*) for ([A-z]*) person")
+	description := "Kayak. A boat for one person."
+	// split := pattern.Split(description, -1)
+	// for _, s := range split {
+	// 	if s != "" {
+	// 		fmt.Println(s)
+	// 	}
+	// }
+	subs := pattern.FindStringSubmatch(description)
+	for _, sub := range subs {
+		fmt.Println(sub)
 	}
+
 }
