@@ -1,0 +1,1 @@
+UPDATE Categories SET Name = ? where ID == ?
